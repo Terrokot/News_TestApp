@@ -1,0 +1,22 @@
+//
+//  TableViewCell.swift
+//  News
+//
+//  Created by Egor Tereshonok on 11/25/19.
+//  Copyright © 2019 Egor Tereshonok. All rights reserved.
+//
+
+import UIKit
+import ExpandableLabel
+
+
+class NewsTableViewCell: UITableViewCell {
+
+    
+    @IBOutlet var expandableLabel: ExpandableLabel!
+    override func prepareForReuse() {
+           super.prepareForReuse()
+           expandableLabel.collapsed = true
+           expandableLabel.text = nil
+    }
+}
