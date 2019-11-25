@@ -10,18 +10,50 @@ import UIKit
 import ExpandableLabel
 
 
+
 class NewsViewController: UITableViewController, ExpandableLabelDelegate {
 
     let numberOfCells : NSInteger = 12
     var states : Array<Bool>!
+    private var news = [Articles]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        states = [Bool](repeating: true, count: numberOfCells)
+        fetchData()
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
     }
+    
+    //MARK: LOAD AND PARSE JSON
+    
+    func fetchData() {
+        
+        let jsonUrlString = "https://newsapi.org/v2/everything?q=apple&from=2019-11-17&to=2019-11-17&sortBy=popularity&apiKey=e51ebcd2cc674fce8bd3c67c2d390675"
+        
+        guard let url = URL(string: jsonUrlString) else { print("hui"); return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            guard let data = data else { return }
+            
+            do {
+                let data = try JSONDecoder().decode(News.self, from: data)
+                self.news = data.articles!
+                self.states = [Bool](repeating: true, count: self.news.count)
+
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } catch let error {
+                print("Error serialization json", error)
+            }
+            
+        }.resume()
+    }
+    
+    //MARK: Configure cells
+    
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -29,66 +61,47 @@ class NewsViewController: UITableViewController, ExpandableLabelDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentSource = preparedSources()[indexPath.row]
+        //let currentSource = preparedSources()[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! NewsTableViewCell
         cell.expandableLabel.delegate = self
+
+        let article = news[indexPath.row]
+        //Title
+        cell.newsTitle.text = article.title ?? ""
+        cell.newsTitle.numberOfLines = 0
+        //Image
+        cell.newsImage.image = UIImage(named: "noImg")
+        if let _ = article.urlToImage {
+            DispatchQueue.global().async {
+                guard let imageUrl = URL(string: article.urlToImage!) else { return } //FIXIT!!!
+                guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+                
+                DispatchQueue.main.async {
+                    cell.newsImage.image = UIImage(data: imageData)
+                }
+            }
+        }
+
         
-        cell.expandableLabel.setLessLinkWith(lessLink: "Close", attributes: [.foregroundColor:UIColor.red], position: currentSource.textAlignment)
+       
+        cell.newsImage.image = UIImage(named: "noImg")
+        
+        cell.expandableLabel.setLessLinkWith(lessLink: "Close", attributes: [.foregroundColor:UIColor.red], position: nil)
         
         cell.layoutIfNeeded()
         
         cell.expandableLabel.shouldCollapse = true
-        cell.expandableLabel.textReplacementType = currentSource.textReplacementType
-        cell.expandableLabel.numberOfLines = currentSource.numberOfLines
-        cell.expandableLabel.collapsed = states[indexPath.row]
-        cell.expandableLabel.text = currentSource.text
+        cell.expandableLabel.numberOfLines = 3
+        cell.expandableLabel.collapsed = true
+        cell.expandableLabel.text = article.description ?? ""
+        
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return states.count
-    }
-    
-    func preparedSources() -> [(text: String, textReplacementType: ExpandableLabel.TextReplacementType, numberOfLines: Int, textAlignment: NSTextAlignment)] {
-        return [(loremIpsumText(), .word, 3, .left),
-                (textWithNewLinesInCollapsedLine(), .word, 2, .center),
-                (textWithLongWordInCollapsedLine(), .character, 1, .right),
-                (textWithVeryLongWords(), .character, 1, .left),
-                (loremIpsumText(), .word, 4, .center),
-                (loremIpsumText(), .character, 3, .right),
-                (loremIpsumText(), .word, 2, .left),
-                (loremIpsumText(), .character, 5, .center),
-                (loremIpsumText(), .word, 3, .right),
-                (loremIpsumText(), .character, 1, .left),
-                (textWithShortWordsPerLine(), .character, 3, .center),
-                (textEmojis(), .character, 3, .left)]
-    }
-    
-    
-    func loremIpsumText() -> String {
-        return "On third line our text need be collapsed because we have ordinary text, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    }
-    
-    func textWithNewLinesInCollapsedLine() -> String {
-        return "When u had new line specialChars \n More not appeared eirmod\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n tempor invidunt ut\n\n\n\n labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    }
-    
-    func textWithLongWordInCollapsedLine() -> String {
-        return "When u had long word which not entered in one line More not appeared FooBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaR tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    }
-    
-    func textWithVeryLongWords() -> String {
-        return "FooBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaR FooBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaR FooBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaR FooBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaR Will show first line and will increase touch area for more voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    }
-    
-    func textWithShortWordsPerLine() -> String {
-        return "A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN"
-    }
-    
-    func textEmojis() -> String {
-        return "😂😄😃😊😍😗😜😅😓☺️😶🤦😒😁😟😵🙁🤔🤓☹️🙄😑😫😱🙂😧🤵😶👥👩‍❤️‍👩💖👨‍❤️‍💋‍👨💏👩‍👩‍👦‍👦👦👀👨‍👩‍👧‍👦👩‍❤️‍👩🗨🕴👩‍❤️‍💋‍👩👧☹️😠😤😆💚🙄🤒💋😿👄"
+        return news.count
     }
     
     //

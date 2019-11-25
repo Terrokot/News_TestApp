@@ -2,7 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,29 +16,50 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Pcq-Hy-MkM" customClass="NewsTableViewCell" customModule="News" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="42.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="177" id="Pcq-Hy-MkM" customClass="NewsTableViewCell" customModule="News" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="177"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pcq-Hy-MkM" id="mxE-t4-oi9">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="42.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="177"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beq-vG-pGG" customClass="ExpandableLabel" customModule="ExpandableLabel">
-                                            <rect key="frame" x="8" y="11.000000000000002" width="398" height="20.666666666666671"/>
+                                            <rect key="frame" x="8" y="100" width="398" height="66"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="twh-ec-QTF">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="COC-p9-LYT"/>
+                                                <constraint firstAttribute="width" constant="150" id="WFR-qW-Ujm"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxr-Zt-aWi">
+                                            <rect key="frame" x="154" y="2" width="252" height="90"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="beq-vG-pGG" firstAttribute="leading" secondItem="mxE-t4-oi9" secondAttribute="leading" constant="8" id="7yu-P3-una"/>
-                                        <constraint firstAttribute="trailing" secondItem="beq-vG-pGG" secondAttribute="trailing" constant="8" id="c1e-JO-jcC"/>
-                                        <constraint firstItem="beq-vG-pGG" firstAttribute="top" secondItem="mxE-t4-oi9" secondAttribute="top" constant="11" id="nbP-0s-cSg"/>
-                                        <constraint firstAttribute="bottom" secondItem="beq-vG-pGG" secondAttribute="bottom" constant="11" id="u3I-qt-cZc"/>
+                                        <constraint firstItem="twh-ec-QTF" firstAttribute="top" secondItem="mxE-t4-oi9" secondAttribute="top" id="1LR-5l-GdW"/>
+                                        <constraint firstItem="twh-ec-QTF" firstAttribute="leading" secondItem="mxE-t4-oi9" secondAttribute="leading" id="K2V-dT-rSX"/>
+                                        <constraint firstItem="beq-vG-pGG" firstAttribute="top" secondItem="Zxr-Zt-aWi" secondAttribute="bottom" constant="8" id="OQ2-6b-56T"/>
+                                        <constraint firstItem="Zxr-Zt-aWi" firstAttribute="leading" secondItem="twh-ec-QTF" secondAttribute="trailing" constant="4" id="Q1T-Bo-tUA"/>
+                                        <constraint firstAttribute="bottom" secondItem="beq-vG-pGG" secondAttribute="bottom" constant="11" id="XNI-Su-9uX"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zxr-Zt-aWi" secondAttribute="trailing" constant="8" id="YKS-fb-hel"/>
+                                        <constraint firstItem="beq-vG-pGG" firstAttribute="top" secondItem="mxE-t4-oi9" secondAttribute="top" constant="100" id="c13-lT-BSD"/>
+                                        <constraint firstItem="beq-vG-pGG" firstAttribute="leading" secondItem="mxE-t4-oi9" secondAttribute="leading" constant="8" id="eAR-m2-VdN"/>
+                                        <constraint firstItem="Zxr-Zt-aWi" firstAttribute="top" secondItem="mxE-t4-oi9" secondAttribute="top" constant="2" id="eVi-JB-riz"/>
+                                        <constraint firstAttribute="trailing" secondItem="beq-vG-pGG" secondAttribute="trailing" constant="8" id="laf-5g-IoI"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="expandableLabel" destination="beq-vG-pGG" id="ydH-AS-8kP"/>
+                                    <outlet property="newsImage" destination="twh-ec-QTF" id="ORm-9K-EBr"/>
+                                    <outlet property="newsTitle" destination="Zxr-Zt-aWi" id="MGZ-x4-1Zq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -52,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536.79999999999995" y="78.710644677661179"/>
+            <point key="canvasLocation" x="534.78260869565224" y="78.260869565217391"/>
         </scene>
     </scenes>
 </document>
