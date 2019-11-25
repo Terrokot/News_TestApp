@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		25CFC177E6134092A8DBA9CB /* Pods_News.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF0E63A32231CEC148CF6A2D /* Pods_News.framework */; };
-		912AD7B5238C796D005CA78C /* Networking in Resources */ = {isa = PBXBuildFile; fileRef = 912AD7B4238C796D005CA78C /* Networking */; };
-		912AD7B7238C7975005CA78C /* JsonDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912AD7B6238C7975005CA78C /* JsonDataModel.swift */; };
+		912AD7B9238C7D63005CA78C /* JsonDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912AD7B8238C7D63005CA78C /* JsonDataModel.swift */; };
 		91A47DA3238C526D0064EB02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A47DA2238C526D0064EB02 /* AppDelegate.swift */; };
 		91A47DA5238C526D0064EB02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A47DA4238C526D0064EB02 /* SceneDelegate.swift */; };
 		91A47DA7238C526D0064EB02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A47DA6238C526D0064EB02 /* ViewController.swift */; };
@@ -20,8 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		912AD7B4238C796D005CA78C /* Networking */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Networking; sourceTree = "<group>"; };
-		912AD7B6238C7975005CA78C /* JsonDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataModel.swift; sourceTree = "<group>"; };
+		912AD7B8238C7D63005CA78C /* JsonDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataModel.swift; sourceTree = "<group>"; };
 		91A47D9F238C526D0064EB02 /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91A47DA2238C526D0064EB02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91A47DA4238C526D0064EB02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +55,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		912AD7BA238C805A005CA78C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				912AD7B8238C7D63005CA78C /* JsonDataModel.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		91A47D96238C526D0064EB02 = {
 			isa = PBXGroup;
 			children = (
@@ -80,11 +86,10 @@
 			children = (
 				91A47DA2238C526D0064EB02 /* AppDelegate.swift */,
 				91A47DA4238C526D0064EB02 /* SceneDelegate.swift */,
-				912AD7B6238C7975005CA78C /* JsonDataModel.swift */,
 				91A47DA6238C526D0064EB02 /* ViewController.swift */,
-				912AD7B4238C796D005CA78C /* Networking */,
 				91A47DB8238C52EB0064EB02 /* Cells */,
 				91A47DA8238C526D0064EB02 /* Main.storyboard */,
+				912AD7BA238C805A005CA78C /* Networking */,
 				91A47DAB238C52740064EB02 /* Assets.xcassets */,
 				91A47DAD238C52740064EB02 /* LaunchScreen.storyboard */,
 				91A47DB0238C52740064EB02 /* Info.plist */,
@@ -170,7 +175,6 @@
 			files = (
 				91A47DAF238C52740064EB02 /* LaunchScreen.storyboard in Resources */,
 				91A47DAC238C52740064EB02 /* Assets.xcassets in Resources */,
-				912AD7B5238C796D005CA78C /* Networking in Resources */,
 				91A47DAA238C526D0064EB02 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +230,7 @@
 			files = (
 				91A47DA7238C526D0064EB02 /* ViewController.swift in Sources */,
 				91A47DB7238C52DD0064EB02 /* TableViewCell.swift in Sources */,
-				912AD7B7238C7975005CA78C /* JsonDataModel.swift in Sources */,
+				912AD7B9238C7D63005CA78C /* JsonDataModel.swift in Sources */,
 				91A47DA3238C526D0064EB02 /* AppDelegate.swift in Sources */,
 				91A47DA5238C526D0064EB02 /* SceneDelegate.swift in Sources */,
 			);

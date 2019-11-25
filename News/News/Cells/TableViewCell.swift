@@ -18,6 +18,7 @@ class NewsTableViewCell: UITableViewCell {
     
     @IBOutlet var expandableLabel: ExpandableLabel!
     override func prepareForReuse() {
+        newsImage.image = UIImage(named: "noImg")
            super.prepareForReuse()
            expandableLabel.collapsed = true
            expandableLabel.text = nil

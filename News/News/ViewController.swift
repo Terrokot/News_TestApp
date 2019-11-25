@@ -31,7 +31,7 @@ class NewsViewController: UITableViewController, ExpandableLabelDelegate {
         
         let jsonUrlString = "https://newsapi.org/v2/everything?q=apple&from=2019-11-17&to=2019-11-17&sortBy=popularity&apiKey=e51ebcd2cc674fce8bd3c67c2d390675"
         
-        guard let url = URL(string: jsonUrlString) else { print("hui"); return }
+        guard let url = URL(string: jsonUrlString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
@@ -61,7 +61,6 @@ class NewsViewController: UITableViewController, ExpandableLabelDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let currentSource = preparedSources()[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! NewsTableViewCell
         cell.expandableLabel.delegate = self
@@ -82,11 +81,9 @@ class NewsViewController: UITableViewController, ExpandableLabelDelegate {
                 }
             }
         }
+        //Description
 
-        
-       
-        cell.newsImage.image = UIImage(named: "noImg")
-        
+        cell.expandableLabel.collapsedAttributedLink = NSAttributedString(string: "Show Less", attributes: [.foregroundColor:UIColor.blue])
         cell.expandableLabel.setLessLinkWith(lessLink: "Close", attributes: [.foregroundColor:UIColor.red], position: nil)
         
         cell.layoutIfNeeded()

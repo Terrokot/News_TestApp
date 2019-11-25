@@ -1,16 +1,20 @@
 PODS:
   - ExpandableLabel (0.5.2)
+  - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
   - ExpandableLabel
+  - SVPullToRefresh
 
 SPEC REPOS:
   trunk:
     - ExpandableLabel
+    - SVPullToRefresh
 
 SPEC CHECKSUMS:
   ExpandableLabel: c2fab6d27860c572d67134b30522a5917746171d
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
 
-PODFILE CHECKSUM: 2f017a74233ec7bfd58f799b13e07f8bed87ee9a
+PODFILE CHECKSUM: 09f2040408d8c2cc6c97765f6f9c873212d83e9b
 
 COCOAPODS: 1.8.4
